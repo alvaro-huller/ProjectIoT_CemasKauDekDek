@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "author": "Senior IoT Engineer",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic",
+      "top": -140,
+      "left": -120,
+      "attrs": { "distance": "35" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic_user",
+      "top": -270,
+      "left": -120,
+      "attrs": { "distance": "50" }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo_lid",
+      "top": -60,
+      "left": 160,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot_mq135",
+      "top": 120,
+      "left": -140,
+      "attrs": { "value": "1200" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 80,
+      "left": 160,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_red",
+      "top": 120,
+      "left": 160,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer",
+      "top": 200,
+      "left": 160,
+      "attrs": { "volume": "0.5" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:5V", "ultrasonic:VCC", "red", [ "v-20", "h-150" ] ],
+    [ "esp:GND.1", "ultrasonic:GND", "black", [ "v-30", "h-160" ] ],
+    [ "esp:5", "ultrasonic:TRIG", "blue", [ "v-40", "h-130" ] ],
+    [ "esp:18", "ultrasonic:ECHO", "green", [ "v-50", "h-120" ] ],
+    [ "esp:5V", "ultrasonic_user:VCC", "red", [ "v-100", "h-150" ] ],
+    [ "esp:GND.1", "ultrasonic_user:GND", "black", [ "v-110", "h-160" ] ],
+    [ "esp:19", "ultrasonic_user:TRIG", "blue", [ "v-80", "h-130" ] ],
+    [ "esp:21", "ultrasonic_user:ECHO", "green", [ "v-90", "h-120" ] ],
+    [ "esp:13", "servo_lid:PWM", "orange", [ "v-10", "h80" ] ],
+    [ "esp:5V", "servo_lid:V+", "red", [ "v-15", "h90" ] ],
+    [ "esp:GND.2", "servo_lid:GND", "black", [ "v15", "h90" ] ],
+    [ "esp:5V", "pot_mq135:VCC", "red", [ "v40", "h-150" ] ],
+    [ "esp:GND.1", "pot_mq135:GND", "black", [ "v50", "h-160" ] ],
+    [ "esp:34", "pot_mq135:SIG", "orange", [ "v30", "h-130" ] ],
+    [ "esp:25", "r1:1", "red", [ "v0" ] ],
+    [ "r1:2", "led_red:A", "red", [ "v0" ] ],
+    [ "led_red:C", "esp:GND.2", "black", [ "v20", "h-100" ] ],
+    [ "esp:26", "buzzer:2", "purple", [ "v0" ] ],
+    [ "buzzer:1", "esp:GND.2", "black", [ "v30", "h-100" ] ]
+  ],
+  "dependencies": {}
+}
